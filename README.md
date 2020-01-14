@@ -36,10 +36,10 @@ var defangIPaddr = function(address) {
     
 // this is a super janky workaround but  ¯\_(ツ)_/¯
     
-    var newaddr = ""; // start with an empty string
-    newaddr += address[0];  // add the first item of address array to string
-    for (i = 1; i < address.length; i++) { // starting with 2nd item of array, add each item with [.] before it 
-           newaddr += "[.]" + address[i];
+    var newaddr = ""; 	// start with an empty string
+    newaddr += address[0];  	// add the first item of address array to string
+    for (i = 1; i < address.length; i++) { 	// starting with 2nd item of array, 
+           newaddr += "[.]" + address[i]; 	// add each item with [.] before it
     }
     
     return newaddr; // return filled string with properly defanged ip address
