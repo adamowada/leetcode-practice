@@ -84,13 +84,13 @@ var defangIPaddr = function(address) {
 
 - Declare an empty string before adding to it in for loop
 
-- array.length returns a number. this is useful in for loops
+- array.length returns a number. This is useful in for loops
 
 - Using += to concatenate strings
 
 #### What Knowledge Would Have Made This Problem Easier
 
-- If the final return is a string sometimes it's easier to string methods rather than fidle around with arrays
+- If the final return is a string sometimes it's easier to use string methods rather than fidle around with arrays
 
 - The proper way to write for loops
 
