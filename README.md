@@ -1,6 +1,6 @@
 ## LeetCode Problems
 
-### [Defanging an IP Address](https://leetcode.com/problems/defanging-an-ip-address/) - Completed on 1/14/20
+### 1. [Defanging an IP Address](https://leetcode.com/problems/defanging-an-ip-address/) - Completed on 1/14/20
 
 #### Description
 
@@ -95,3 +95,89 @@ var defangIPaddr = function(address) {
 - The proper way to write for loops
 
 - Sometimes jank is ok?
+
+### 2. [Find Numbers With Even Number of Digits](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/submissions/) - Completed on 1/14/20
+
+#### Description
+
+Given an array nums of integers, return how many of them contain an even number of digits.
+
+```
+Example 1:
+
+Input: nums = [12,345,2,6,7896]
+Output: 2
+Explanation: 
+12 contains 2 digits (even number of digits). 
+345 contains 3 digits (odd number of digits). 
+2 contains 1 digit (odd number of digits). 
+6 contains 1 digit (odd number of digits). 
+7896 contains 4 digits (even number of digits). 
+Therefore only 12 and 7896 contain an even number of digits.
+Example 2:
+
+Input: nums = [555,901,482,1771]
+Output: 1 
+Explanation: 
+Only 1771 contains an even number of digits.
+```
+
+#### Constraints
+
+Constraints:
+
+1 <= nums.length <= 500
+1 <= nums[i] <= 10^5
+
+#### My Solution 
+
+```
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+
+var findNumbers = function(nums) {
+    var evens = 0;		\\ start with empty string
+    for (i = 0; i < nums.length; i++ ) {	\\ for each item in nums array
+        if (nums[i].toString().length % 2 == 0) {	\\ check if number of digits is evenly divisible by 2 
+            evens += 1;
+        }
+    }
+    return evens;
+};
+```
+
+#### My Original Plan
+
+1. Check length of each number in a for loop
+2. If length mod 2 = 0 then count it
+3. Return number of evens
+
+#### What I Ended Up Doing
+
+1. Turn each number in nums array into string, then check length of that string
+2. If length mod 2 = 0 then count it
+3. Return number of evens
+
+#### How Long Did It Take Me
+
+17min
+
+#### What I learned
+
+- How to use % mod 
+
+- That you can't use .length() on a number
+
+- How to convert number into string with .toString()
+
+- That if you misplace "return evens;" in your for loop bracket bad things happen
+
+- You can stack methods
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- Use better organization of code to avoid errors
+
+- You have to convert a number into a string to get its length
