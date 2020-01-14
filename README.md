@@ -1,4 +1,4 @@
-## Leetcode Problems
+## LeetCode Problems
 
 ### [Defanging an IP Address](https://leetcode.com/problems/defanging-an-ip-address/) - Completed on 1/14/20
 
