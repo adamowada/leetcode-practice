@@ -69,31 +69,22 @@ var defangIPaddr = function(address) {
 #### What I learned
 
 - Difference between return and console.log()
-
 - REMEMBER TO ADD SEMICOLONS
-
 - How to turn string into an array with split method
 	string.split(separator, limit)
 	and if you leave it as string.split() the array will only have one item being "string"
-
 - How to insert/remove items in array using splice method
 	array.splice(index, howmany, item1, ....., itemX)
 	but not really because I don't understand how howmany can equal 0 or its proper use because I ended up using a string 
-
 - How to write a for loop
-
 - Declare an empty string before adding to it in for loop
-
 - array.length returns a number. This is useful in for loops
-
 - Using += to concatenate strings
 
 #### What Knowledge Would Have Made This Problem Easier
 
 - If the final return is a string sometimes it's easier to use string methods rather than fidle around with arrays
-
 - The proper way to write for loops
-
 - Sometimes jank is ok?
 
 ### 2. [Find Numbers With Even Number of Digits](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/submissions/) - Easy - Completed on 1/14/20
@@ -167,19 +158,14 @@ var findNumbers = function(nums) {
 #### What I learned
 
 - How to use % mod 
-
 - That you can't use .length() on a number
-
 - How to convert number into string with .toString()
-
 - That if you misplace "return evens;" in your for loop bracket bad things happen
-
 - You can stack methods
 
 #### What Knowledge Would Have Made This Problem Easier
 
 - Use better organization of code to avoid errors
-
 - You have to convert a number into a string to get its length
 
 ### 3. [Two Sum](https://leetcode.com/problems/two-sum/submissions/) - Easy - Completed on 1/21/20
@@ -245,3 +231,97 @@ It went according to plan.
 #### What Knowledge Would Have Made This Problem Easier
 
 - Having had experience with nested for loops, but again this was already pretty easy.
+
+### 4. [Reverse Integer](https://leetcode.com/problems/reverse-integer/) - Easy - Completed on 1/22/20
+
+#### Description
+
+Given a 32-bit signed integer, reverse digits of an integer.
+
+```
+Example 1:
+
+Input: 123
+Output: 321
+Example 2:
+
+Input: -123
+Output: -321
+Example 3:
+
+Input: 120
+Output: 21
+```
+
+#### Constraints
+
+Constraints:
+
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.
+
+#### My Solution 
+
+```
+/**
+ * @param {number} x
+ * @return {number}
+ */
+var reverse = function(x) {
+    var answer = '';
+    var x = x.toString();
+    if (x.charAt(-1) === '0') {
+        x = x.substr(0, x.length - 2);
+        };
+    if (x.charAt(0) === '-') {
+        answer = answer + '-';
+        x = x.substr(1, x.length - 1);
+        };
+    for (i = 0; i < x.length; i++) {
+        answer = answer + x.charAt(x.length - i - 1);
+        };    
+    if (Math.abs(Number(answer)) > 2147483647) {
+        return 0;
+        };
+    return(Number(answer));
+};
+```
+
+#### My Original Plan
+
+1. Remove 0s from end of number
+2. Treat number as an array of numbers
+3. Return loop from end of array to beginning (reversing the order of characters)
+
+#### What I Ended Up Doing
+
+1. Contemplating the meaninglessness of life, struggle, and pain
+2. Re-read the instructions
+3. Turn number into string
+4. Remove 0s at the end 
+5. Keep negative sign in front if there in a new string
+6. Loop backwards through string with charAt() and move to new string
+7. Add if statemenet if it overflows
+8. Return finished string as a number
+
+#### How Long Did It Take Me
+
+1hr 30min
+
+#### What I learned
+
+- PATIENCE. And to breathe. And tenacity.
+- The importance of really understanding the problem domain
+- The importance of studying examples for patterns to understand edge cases
+- In order to concat a string I need to reassign it
+- Calling toString as toString() because toChar() was throwing errors
+- Learning how to debug the toChar() method ^
+- Using Math.abs() instead of just > to evaluate overflow
+- How to use string methods on numbers, and vice versa, and using toChar() on strings like an array's index
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- I still don't REALLY understand the difference between methods and functions, but understanding when you can just dot method or if you need dot method()
+- Taking a few more minutes to read problem, study examples, and think about edge cases
+- Firmer understanding of data types and their methods
+- Syntax ^
+- Knowing that I could start at end of for loop and decrement 
