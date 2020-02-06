@@ -1,6 +1,6 @@
 ## LeetCode Problems
 
-### 1. [Defanging an IP Address](https://leetcode.com/problems/defanging-an-ip-address/) - Completed on 1/14/20
+### 1. [Defanging an IP Address](https://leetcode.com/problems/defanging-an-ip-address/) - Easy - Completed on 1/14/20
 
 #### Description
 
@@ -96,7 +96,7 @@ var defangIPaddr = function(address) {
 
 - Sometimes jank is ok?
 
-### 2. [Find Numbers With Even Number of Digits](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/submissions/) - Completed on 1/14/20
+### 2. [Find Numbers With Even Number of Digits](https://leetcode.com/problems/find-numbers-with-even-number-of-digits/submissions/) - Easy - Completed on 1/14/20
 
 #### Description
 
@@ -181,3 +181,67 @@ var findNumbers = function(nums) {
 - Use better organization of code to avoid errors
 
 - You have to convert a number into a string to get its length
+
+### 3. [Two Sum](https://leetcode.com/problems/two-sum/submissions/) - Easy - Completed on 1/21/20
+
+#### Description
+
+Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+```
+Example:
+
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1].
+```
+
+#### Constraints
+
+Constraints:
+
+None. 
+
+#### My Solution 
+
+```
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var twoSum = function(nums, target) {
+    for (i = 0; i < nums.length; i++) {
+        for (j = 0; j < nums.length; j++) {
+            if (i != j && nums[i] + nums[j] === target) {
+                return [i, j];
+                };
+            };
+        };
+};
+```
+
+#### My Original Plan
+
+1. Loop through each number in array
+2. For each number, loop through rest of numbers and sum
+3. If sum equals target, return array of those numbers
+
+#### What I Ended Up Doing
+
+It went according to plan.
+
+#### How Long Did It Take Me
+
+15min
+
+#### What I learned
+
+- This problem was pretty easy for me. The biggest thing I learned was how to use nested for loops.
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- Having had experience with nested for loops, but again this was already pretty easy.
