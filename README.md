@@ -325,3 +325,86 @@ var reverse = function(x) {
 - Firmer understanding of data types and their methods
 - Syntax ^
 - Knowing that I could start at end of for loop and decrement 
+
+
+$$$
+
+
+### 5. [Palindrome Number](https://leetcode.com/submissions/detail/296550434/) - Easy - Completed on 1/22/20
+
+#### Description
+
+Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward. Follow up:
+
+Could you solve it without converting the integer to a string?
+
+```
+Example 1:
+
+Input: 121
+Output: true
+Example 2:
+
+Input: -121
+Output: false
+Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+Example 3:
+
+Input: 10
+Output: false
+Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+```
+
+#### Constraints
+
+Constraints:
+
+None.
+
+#### My Solution 
+
+```
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    if (x < 0) {
+        return false;
+        };
+    for (i = 0; i < (x.toString().length); i++) {
+        if (x.toString().charAt(i) !== x.toString().charAt(x.toString().length -i -1)) {
+            return false;
+            };
+        };
+    return true;
+};
+```
+
+#### My Original Plan
+
+1. If < 0, return false
+2. Combine .toString() with .charAt() to loop through number
+3. Return false if characters don't strictly equal each other
+
+#### What I Ended Up Doing
+
+1. If < 0, return false
+2. Loop through number with .toString().charAt(), compare first char to last char, second char to second to last char, etc, with -i-1 logic
+3. Return false if characters don't strictly equal each other
+4. Success without turning number into string!
+
+#### How Long Did It Take Me
+
+40min
+
+#### What I learned
+
+- More practice reversing through strings (and numbers)
+- A practical use of -i-1 logic to compare to i 
+- Really understanding loop logic, my first attempt put return true in the if/else statement inside the for loop, but this caused the first matching chars to return true
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- Loop logic
+- A smarter way to loop, as this solution goes through the whole length when it only needs to go through half, ie wasted compute time. 
