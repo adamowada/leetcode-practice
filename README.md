@@ -326,10 +326,6 @@ var reverse = function(x) {
 - Syntax ^
 - Knowing that I could start at end of for loop and decrement 
 
-
-$$$
-
-
 ### 5. [Palindrome Number](https://leetcode.com/submissions/detail/296550434/) - Easy - Completed on 1/22/20
 
 #### Description
@@ -408,3 +404,137 @@ var isPalindrome = function(x) {
 
 - Loop logic
 - A smarter way to loop, as this solution goes through the whole length when it only needs to go through half, ie wasted compute time. 
+
+### 6. [Roman to Integer](https://leetcode.com/problems/roman-to-integer/) - Easy - Completed on 1/23/20
+
+#### Description
+
+Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+```
+Symbol       Value
+I             1
+V             5
+X             10
+L             50
+C             100
+D             500
+M             1000
+```
+For example, two is written as II in Roman numeral, just two one's added together. Twelve is written as, XII, which is simply X + II. The number twenty seven is written as XXVII, which is XX + V + II.
+
+Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+I can be placed before V (5) and X (10) to make 4 and 9. 
+X can be placed before L (50) and C (100) to make 40 and 90. 
+C can be placed before D (500) and M (1000) to make 400 and 900.
+Given a roman numeral, convert it to an integer.
+
+```
+Example 1:
+
+Input: "III"
+Output: 3
+Example 2:
+
+Input: "IV"
+Output: 4
+Example 3:
+
+Input: "IX"
+Output: 9
+Example 4:
+
+Input: "LVIII"
+Output: 58
+Explanation: L = 50, V= 5, III = 3.
+Example 5:
+
+Input: "MCMXCIV"
+Output: 1994
+Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+```
+
+#### Constraints
+
+Constraints:
+
+Input is guaranteed to be within the range from 1 to 3999.
+
+#### My Solution 
+
+```
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var romanToInt = function(s) {
+    var array = [];
+    var numberArray = [];
+    var romanArray = [];
+    var answer = 0;
+    array = s.split("");
+    for (i = 0; i < array.length; i++) {
+        if (array[i] === 'I') {
+            numberArray.push(1);
+            }
+        if (array[i] === 'V') {
+            numberArray.push(5);
+            }
+        if (array[i] === 'X') {
+            numberArray.push(10);
+            }
+        if (array[i] === 'L') {
+            numberArray.push(50);
+            }
+        if (array[i] === 'C') {
+            numberArray.push(100);
+            }
+        if (array[i] === 'D') {
+            numberArray.push(500);
+            }
+        if (array[i] === 'M') {
+            numberArray.push(1000);
+            }
+    }
+    for (i = 0; i < numberArray.length-1; i++) {
+        if (numberArray[i] >= numberArray[i+1]) {
+            romanArray.push(numberArray[i]); // remember that newArray.push(i) != newArray.push(array[i]) and use the later
+        } else if (numberArray[i] < numberArray[i+1]) {
+            romanArray.push(-numberArray[i]);
+            }
+        }
+    romanArray.push(numberArray[numberArray.length-1]);
+    for (i = 0; i < romanArray.length; i++) {
+        answer = answer + romanArray[i];
+        }
+    return answer;
+};
+```
+
+#### My Original Plan
+
+1. Assign I, IV, V, IX, X, XL, L, XC, C, CD, D, CM, M to their integer values
+2. Loop through string looking for these characters or character pairs
+3. Add up corresponding values
+
+#### What I Ended Up Doing
+
+1. Only assign I, V, X, L, C, D, M to integer values
+2. Convert string of characters to array of integer values per rule 1
+3. Realize that IV = 4 = -1 + 5
+4. Loop through new array of numbers and if the number on the right is larger turn number negative
+5. Return array sum
+
+#### How Long Did It Take Me
+
+40min
+
+#### What I learned
+
+- How to push a value from one array to another in a loop
+- Creative problem solving, how to look at a problem from a new angle
+- Roman numerals 
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- Conceptually, I was running into issues trying to wrap my mind about how to deal with the rules of roman numnerals and in general overthinking thinks with a complicated if/else ruleset. If I had had the meta strategy of rethinking problems to component parts and easier solutions this would have been easier to figure out. 
