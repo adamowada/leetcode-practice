@@ -317,6 +317,7 @@ var reverse = function(x) {
 - Learning how to debug the toChar() method ^
 - Using Math.abs() instead of just > to evaluate overflow
 - How to use string methods on numbers, and vice versa, and using toChar() on strings like an array's index
+- Move back to front in a for loop with .length() - i - 1 logic
 
 #### What Knowledge Would Have Made This Problem Easier
 
@@ -386,7 +387,7 @@ var isPalindrome = function(x) {
 #### What I Ended Up Doing
 
 1. If < 0, return false
-2. Loop through number with .toString().charAt(), compare first char to last char, second char to second to last char, etc, with -i-1 logic
+2. Loop through number with .toString().charAt(), compare first char to last char, second char to second to last char, etc, with .length - i - 1 logic
 3. Return false if characters don't strictly equal each other
 4. Success without turning number into string!
 
@@ -538,3 +539,210 @@ var romanToInt = function(s) {
 #### What Knowledge Would Have Made This Problem Easier
 
 - Conceptually, I was running into issues trying to wrap my mind about how to deal with the rules of roman numnerals and in general overthinking thinks with a complicated if/else ruleset. If I had had the meta strategy of rethinking problems to component parts and easier solutions this would have been easier to figure out. 
+
+### 7. [Find Winner on a Tic Tac Toe Game](https://https://leetcode.com/problems/find-winner-on-a-tic-tac-toe-game/) - Easy - Completed on 2/11/20
+
+#### Description
+
+Tic-tac-toe is played by two players A and B on a 3 x 3 grid.
+
+Here are the rules of Tic-Tac-Toe:
+
+Players take turns placing characters into empty squares (" ").
+The first player A always places "X" characters, while the second player B always places "O" characters.
+"X" and "O" characters are always placed into empty squares, never on filled ones.
+The game ends when there are 3 of the same (non-empty) character filling any row, column, or diagonal.
+The game also ends if all squares are non-empty.
+No more moves can be played if the game is over.
+Given an array moves where each element is another array of size 2 corresponding to the row and column of the grid where they mark their respective character in the order in which A and B play.
+
+Return the winner of the game if it exists (A or B), in case the game ends in a draw return "Draw", if there are still movements to play return "Pending".
+
+You can assume that moves is valid (It follows the rules of Tic-Tac-Toe), the grid is initially empty and A will play first.
+
+```
+Example 1:
+
+Input: moves = [[0,0],[2,0],[1,1],[2,1],[2,2]]
+Output: "A"
+Explanation: "A" wins, he always plays first.
+"X  "    "X  "    "X  "    "X  "    "X  "
+"   " -> "   " -> " X " -> " X " -> " X "
+"   "    "O  "    "O  "    "OO "    "OOX"
+
+Example 2:
+
+Input: moves = [[0,0],[1,1],[0,1],[0,2],[1,0],[2,0]]
+Output: "B"
+Explanation: "B" wins.
+"X  "    "X  "    "XX "    "XXO"    "XXO"    "XXO"
+"   " -> " O " -> " O " -> " O " -> "XO " -> "XO " 
+"   "    "   "    "   "    "   "    "   "    "O  "
+
+Example 3:
+
+Input: moves = [[0,0],[1,1],[2,0],[1,0],[1,2],[2,1],[0,1],[0,2],[2,2]]
+Output: "Draw"
+Explanation: The game ends in a draw since there are no moves to make.
+"XXO"
+"OOX"
+"XOX"
+
+Example 4:
+
+Input: moves = [[0,0],[1,1]]
+Output: "Pending"
+Explanation: The game has not finished yet.
+"X  "
+" O "
+"   "
+```
+
+#### Constraints
+
+1 <= moves.length <= 9
+moves[i].length == 2
+0 <= moves[i][j] <= 2
+There are no repeated elements on moves.
+moves follow the rules of tic tac toe.
+
+#### My Solution 
+
+```
+/**
+ * @param {number[][]} moves
+ * @return {string}
+ */
+var tictactoe = function(moves) {
+    var aMoves = [];
+    var bMoves = [];
+    var aRow = [];
+    var aColumn = [];
+    var bRow = [];
+    var bColumn = [];
+    for (let i = 0; i < moves.length; i++ ){
+        if (i % 2 === 0){
+            aMoves.push(moves[i]);
+        } else {
+            bMoves.push(moves[i]);
+        }
+    }
+
+    function isMoveThere(move, playerMoves) {
+        for (var i = 0; i < playerMoves.length; i++) {
+            if (playerMoves[i][0] === move[0] && playerMoves[i][1] === move[1]){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    if (isMoveThere([0,0], aMoves) === true && isMoveThere([1,1], aMoves) === true && isMoveThere([2,2], aMoves) === true) {
+        return 'A';
+    }
+    if (isMoveThere([2,0], aMoves) === true && isMoveThere([1,1], aMoves) === true && isMoveThere([0,2], aMoves) === true) {
+        return 'A';
+    }
+    for (let i = 0; i < aMoves.length; i++ ){
+        aRow.push(aMoves[i][0]);
+    }
+    for (let i = 0; i < aMoves.length; i++ ){
+        aColumn.push(aMoves[i][1]);
+    }
+    for (let i = 0; i < 3; i++){
+        let cCount = 0;
+        let rCount = 0;
+        for (let j = 0; j < aRow.length; j++){
+            if (aRow[j] === i) {
+                rCount++;
+            }
+        }
+        for (let j = 0; j < aColumn.length; j++){
+            if (aColumn[j] === i) {
+                cCount++;
+            }
+        }
+        if (rCount === 3 || cCount === 3){
+            return 'A';
+        }
+    }
+
+    
+    if (isMoveThere([0,0], bMoves) === true && isMoveThere([1,1], bMoves) === true && isMoveThere([2,2], bMoves) === true) {
+        return 'B';
+    }
+    if (isMoveThere([2,0], bMoves) === true && isMoveThere([1,1], bMoves) === true && isMoveThere([0,2], bMoves) === true) {
+        return 'B';
+    }
+    for (let i = 0; i < bMoves.length; i++ ){
+        bRow.push(bMoves[i][0]);
+    }
+    for (let i = 0; i < bMoves.length; i++ ){
+        bColumn.push(bMoves[i][1]);
+    }
+    for (let i = 0; i < 3; i++){
+        let cCount = 0;
+        let rCount = 0;
+        for (let j = 0; j < bRow.length; j++){
+            if (bRow[j] === i) {
+                rCount++;
+            }
+        }
+        for (let j = 0; j < bColumn.length; j++){
+            if (bColumn[j] === i) {
+                cCount++;
+            }
+        }
+        if (rCount === 3 || cCount === 3){
+            return 'B';
+        }
+    }    
+    
+    if (moves.length === 9){
+        return "Draw";
+    }
+    return "Pending";    
+};
+
+
+//sort all moves to A moves
+//sort all moves to B moves
+
+//check if winner is A
+//    check A moves for both diagonals
+//    check if 3 of same row in A moves
+//    check if 3 of same column in A moves
+//check if winner is B
+//    check B moves for both diagonals
+//    check if 3 of same row in B moves
+//    check if 3 of same column in B moves
+//if no winner
+//    if 9 moves return draw
+//    else return pending
+```
+
+#### My Original Plan
+
+See comments
+
+#### What I Ended Up Doing
+
+See comments. But also, struggling for ever to figure out JS object equality.
+
+#### How Long Did It Take Me
+
+4hrs? Split over a few days. 
+
+#### What I learned
+
+- That you can't use a for loop and === to check if array is in an array because an array is an object in JS and object equality checks if it points to the same object in memory, not whether the contents of the object (array) are the same.
+- So about 2.5 hrs was spent with the logic done and solid but essentially debugging why 
+```
+[0,0] === [0,0] is false
+```
+- The rest of the time was planning my approach in the beginning and then working out how to check if a target move is in an array of moves.
+- On the plus side I learned a lot about debugging in the console.
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- I reaaaaaaly wish I had known about object equality before ripping my hair out thinking I was going crazy and getting syntax wrong haha
