@@ -746,3 +746,274 @@ See comments. But also, struggling for ever to figure out JS object equality.
 #### What Knowledge Would Have Made This Problem Easier
 
 - I reaaaaaaly wish I had known about object equality before ripping my hair out thinking I was going crazy and getting syntax wrong haha
+
+### 8. [Number of Steps to Reduce a Number to Zero](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/) - Easy - Completed on 2/17/20
+
+#### Description
+
+Given a non-negative integer num, return the number of steps to reduce it to zero. If the current number is even, you have to divide it by 2, otherwise, you have to subtract 1 from it.
+
+```
+Example 1:
+
+Input: num = 14
+Output: 6
+Explanation: 
+Step 1) 14 is even; divide by 2 and obtain 7. 
+Step 2) 7 is odd; subtract 1 and obtain 6.
+Step 3) 6 is even; divide by 2 and obtain 3. 
+Step 4) 3 is odd; subtract 1 and obtain 2. 
+Step 5) 2 is even; divide by 2 and obtain 1. 
+Step 6) 1 is odd; subtract 1 and obtain 0.
+
+Example 2:
+
+Input: num = 8
+Output: 4
+Explanation: 
+Step 1) 8 is even; divide by 2 and obtain 4. 
+Step 2) 4 is even; divide by 2 and obtain 2. 
+Step 3) 2 is even; divide by 2 and obtain 1. 
+Step 4) 1 is odd; subtract 1 and obtain 0.
+
+Example 3:
+
+Input: num = 123
+Output: 12
+```
+
+#### Constraints
+
+Constraints:
+
+0 <= num <= 10^6
+
+#### My Solution 
+
+```
+/**
+ * @param {number} num
+ * @return {number}
+ */
+var numberOfSteps  = function(num) {
+    var steps = 0;
+    var updatedNum = num;
+    while (updatedNum > 0) {
+        if (updatedNum % 2 > 0) {
+            updatedNum = updatedNum - 1;
+            steps++;
+        } else {
+            updatedNum = updatedNum / 2;
+            steps++;
+        }
+    }
+    return steps;
+};
+```
+
+#### My Original Plan
+
+1. Write logic to divide by 2 or subtract 1
+2. Implement counter to track steps
+3. Return counter
+
+#### What I Ended Up Doing
+
+Basically went according to plan.
+
+1. Wrote a while loop with if/else statements to determine whether to divide by 2 or subtract 1
+2. After each operation the number updates and steps increment 
+3. Once number reaches 0, while loop stops and returns total steps
+
+#### How Long Did It Take Me
+
+About 15min
+
+#### What I learned
+
+- Save the function's argument as a variable to operate on it and update it
+- If/else statement nested in a while loop
+- Pretty easy question
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- Took me a few minutes to realize all I needed was a good while loop. I think that practice would have helped me spot it sooner, and fundamentally realizing that loops with a variable amount of steps are good candidates for while loops.
+
+### 9. [Fizz Buzz](https://leetcode.com/problems/fizz-buzz/) - Easy - Completed on 2/17/20
+
+#### Description
+
+Write a program that outputs the string representation of numbers from 1 to n.
+
+But for multiples of three it should output “Fizz” instead of the number and for the multiples of five output “Buzz”. For numbers which are multiples of both three and five output “FizzBuzz”.
+
+```
+Example:
+
+n = 15,
+
+Return:
+[
+    "1",
+    "2",
+    "Fizz",
+    "4",
+    "Buzz",
+    "Fizz",
+    "7",
+    "8",
+    "Fizz",
+    "Buzz",
+    "11",
+    "Fizz",
+    "13",
+    "14",
+    "FizzBuzz"
+]
+```
+
+#### Constraints
+
+None.
+
+#### My Solution 
+
+```
+/**
+ * @param {number} n
+ * @return {string[]}
+ */
+var fizzBuzz = function(n) {
+    var arr = [];
+    for (var i = 1; i <= n; i++) {
+        if (i % 3 > 0 && i % 5 > 0) {
+            arr.push(i.toString());     // proper syntax is i.toString() NOT toString(i)
+        }
+        if (i % 3 === 0 && i % 5 > 0) {
+            arr.push('Fizz');
+        }    
+        if (i % 3 > 0 && i % 5 === 0) {
+            arr.push('Buzz');    
+        }
+        if (i % 3 === 0 && i % 5 === 0) {
+            arr.push('FizzBuzz');    
+        }
+    }
+    return arr;
+};
+```
+
+#### My Original Plan
+
+1. Use a for loop that pushes to array
+2. If not divisible by 3 or 5, covert to string
+3. If divisible by 3 and not 5, push 'Fizz'
+4. If divisible by 5 and not 3, push 'Buzz'
+5. If divisible by 3 and 5, push 'FizzBuzz'
+
+#### What I Ended Up Doing
+
+Ah, the classic fizzbuzz. Went according to plan. There is something to be said about the number of lines of code used vs the readibility of the code. I know I could have first checked divisibility by 15, then 5 or 3, then remaining 5 or 3; but I like how readible the intention of the code is in my solution.
+
+#### How Long Did It Take Me
+
+About 20min
+
+#### What I learned
+
+- Had a few issues with .toString() syntax, as I did it from memory without looking it up first
+- I first tried arr.push(toString(i)) before realizing it should be arr.push(i.toString())
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- Remember the syntax is number.toString()!
+
+### 10. [Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/) - Easy - Completed on 2/29/20
+
+#### Description
+
+Write a function to find the longest common prefix string amongst an array of strings.
+
+If there is no common prefix, return an empty string "".
+
+```
+Example 1:
+
+Input: ["flower","flow","flight"]
+Output: "fl"
+
+Example 2:
+
+Input: ["dog","racecar","car"]
+Output: ""
+Explanation: There is no common prefix among the input strings.
+```
+
+#### Constraints
+
+Note: All given inputs are in lowercase letters a-z.
+
+#### My Solution 
+
+```
+/**
+ * @param {string[]} strs
+ * @return {string}
+ */
+var longestCommonPrefix = function(strs) {
+    var answer = '';
+    var longestLength = 0; 
+        
+    // save length of longest string to longestLength
+    for ( var i = 0; i < strs.length; i++ ) {
+        if ( strs[i].length > longestLength ) {
+            var longestLength = strs[i].length; // in case of runtime error remember to check spelling lol
+        }
+    }
+    
+    // pushes letters that match until finds letter that doesn't match
+    for ( var j = 0; j < longestLength; j++ ) {       // for each letter in the longest string
+        var letters = [];                           // create array for jth letters
+        for ( var k = 0; k < strs.length; k++ ) {     // for each string in strs
+            letters.push( strs[k][j] );               // push jth letter of kth string to letters array
+        }
+        if ( letters.every( ( letter, l, array ) => letter === array[0] ) ) { // if every letter is the same as the first in letters array, returns true
+            answer = answer.concat(letters[0]); // if returns true, concat letter to answer string
+        } else {
+            break;  // stops checking letters once loop finds a letter that doesn't all match
+        }
+    }
+    
+    return answer;
+};
+```
+
+#### My Original Plan
+
+Basically strs[0][0] strs[1][0] strs[2][0]
+
+1. Get length of longest string in given array
+2. Compare first letter of first word, to first letter of second word, to first letter of third word
+3. Continue with each letter
+4. return string of letters
+
+#### What I Ended Up Doing
+
+This question was complicated and required a few complex for loops, and careful planning. Basically realizing that the order of loops is for each letter in the longest string, check each string, and use a .every() to check if all letters equal the first (which means they are all the same). See comments in code. 
+
+#### How Long Did It Take Me
+
+1 hr
+
+#### What I learned
+
+- If at first you don't succeed, check for spelling mistakes. I misspelled longestLength on line 12, which meant I wasn't getting the longest length of any string. 
+- How to really think through a nested loop problem
+- How the .every() method works
+- Basics of => functions
+
+#### What Knowledge Would Have Made This Problem Easier
+
+- .every() method
+- Arrow functions
+- Putting the empty var on line 18, which meant that the array cleared after each letter was checked 
