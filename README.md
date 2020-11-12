@@ -1017,3 +1017,46 @@ This question was complicated and required a few complex for loops, and careful 
 - .every() method
 - Arrow functions
 - Putting the empty var on line 18, which meant that the array cleared after each letter was checked 
+
+
+```
+```
+https://leetcode.com/problems/same-tree/
+```
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSameTree(self, p: TreeNode, q: TreeNode) -> bool:
+        if p:
+            q_p = [p]
+        else:
+            q_p = []
+        if q:
+            q_q = [q]
+        else:
+            q_q = []
+        
+        while q_p and q_q:
+            temp_p = q_p.pop(0)
+            temp_q = q_q.pop(0)
+            if temp_p.val != temp_q.val:
+                return False
+            if temp_p.left and temp_q.left:
+                q_p.append(temp_p.left)
+                q_q.append(temp_q.left)
+            if temp_p.right and temp_q.right:
+                q_p.append(temp_p.right)
+                q_q.append(temp_q.right)
+            if temp_p.left and not temp_q.left or temp_q.left and not temp_p.left:
+                return False
+            if temp_p.right and not temp_q.right or temp_q.right and not temp_p.right:
+                return False
+        if len(q_p) > 0 or len(q_q) > 0:
+            return False
+        else:
+            return True
+```
